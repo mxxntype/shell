@@ -8,5 +8,5 @@ echo "shutting down..."
 if [ -x "$(command -v doas)" ]; then
   doas poweroff
 else
-  sudo shutdown
+  sudo shutdown -H now
 fi
