@@ -1,0 +1,5 @@
+#!/bin/sh
+
+swww kill
+brillo -O
+hyprctl dispatch exit yes
