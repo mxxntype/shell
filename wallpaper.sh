@@ -6,7 +6,10 @@ if [ $SWWW_DAEMONS -le $THRESHOLD ]; then
   swww init && swww clear 1e1e2e
 fi
 
-WALLPAPER="$(ls $HOME/.config/wallpapers | grep '.gif' | sort -R | head -n 1)"
-echo $WALLPAPER
+WALLPAPER_DIR=$HOME/.config/wallpapers
+WALLPAPER_STYLE=gradient
 
-sleep 0.2 && swww img --outputs=HDMI-A-1 $HOME/.config/wallpapers/$WALLPAPER
+WALLPAPER_FILE="$(ls $WALLPAPER_DIR/$WALLPAPER_STYLE | sort -R | head -n 1)"
+echo $WALLPAPER_FILE
+
+sleep 0.2 && swww img --outputs=HDMI-A-1 $WALLPAPER_DIR/$WALLPAPER_STYLE/$WALLPAPER_FILE
