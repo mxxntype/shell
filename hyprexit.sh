@@ -20,17 +20,17 @@ elif [ -x $( command -v tofi ) ]; then
   # exit Hyprland
   if [[ "$ACTION" = "$TEXT_EXIT" ]]; then
     echo "exiting wayland..."
-    $HOME/shell/hyprexit &
+    $HOME/shell/hyprexit.sh &
 
   # reboot the system
   elif [[ "$ACTION" = "$TEXT_REBOOT" ]]; then
     echo "rebooting..."
-    $HOME/shell/reboot &
+    $HOME/shell/reboot.sh &
 
   # power off the system
   elif [[ "$ACTION" = "$TEXT_SHUTDOWN" ]]; then
     echo "shutting down..."
-    $HOME/shell/shutdown &
+    $HOME/shell/shutdown.sh &
 
   # fallback
   else
