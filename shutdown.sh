@@ -1,6 +1,6 @@
 #!/bin/sh
 
-~/shell/hyprexit &
+~/shell/hyprexit.sh &
 
 echo "shutting down..."
 if [ -x "$(command -v doas)" ]; then

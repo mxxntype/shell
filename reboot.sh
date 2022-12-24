@@ -1,6 +1,6 @@
 #!/bin/sh
 
-~/shell/hyprexit &
+~/shell/hyprexit.sh &
 
 if [ -x "$(command -v brillo)" ]; then
   brillo -O
