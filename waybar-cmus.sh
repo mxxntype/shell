@@ -1,7 +1,7 @@
 #!/bin/sh
 
 CMUS_FILE=$( cmus-remote -C "format_print %f" )
-CMUS_TRACKNAME=$( echo $CMUS_FILE | sed -e "s#.*/##" | sed -e "s/.mp3//" | sed -e "s/.* - //" | sed -e "s/ \[.*\]//" )
+CMUS_TRACKNAME=$( echo $CMUS_FILE | sed -e "s#.*/##" | sed -e "s/.mp3//" | sed -e "s/.* - //" | sed -e "s/ \[\+.*\]//" )
 CMUS_OUTPUT=$CMUS_TRACKNAME
 
 CMUS_STATUS="$( echo -e $( cmus-remote -C status ) )"
