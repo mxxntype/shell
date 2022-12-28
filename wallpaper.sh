@@ -12,6 +12,12 @@ init () {
   fi
 }
 
+restore () {
+  if [ -f "$HOME/.cache/wallpaper" ]; then
+    WALLPAPER_FILE=$(cat $HOME/.cache/wallpaper)
+  fi
+}
+
 # picks a random wallpaper
 random () {
   WALLPAPER_FILE="$(ls $WALLPAPER_DIR/$WALLPAPER_STYLE | sort -R | head -n 1)"
@@ -38,19 +44,20 @@ interactive () {
 apply () {
   if [ -f "$WALLPAPER_DIR/$WALLPAPER_STYLE/$WALLPAPER_FILE" ]; then
     sleep 0.2 && swww img --outputs=HDMI-A-1 $WALLPAPER_DIR/$WALLPAPER_STYLE/$WALLPAPER_FILE &&
-      echo "applied: $WALLPAPER_STYLE/$WALLPAPER_FILE."
-    export WALLPAPER_FILE
+      echo "applied: $WALLPAPER_STYLE/$WALLPAPER_FILE." &&
+      echo "$WALLPAPER_FILE" > $HOME/.cache/wallpaper
   else
     echo "$WALLPAPER_DIR/$WALLPAPER_STYLE/$WALLPAPER_FILE: file does not exist."
   fi
-  export WALLPAPER_DIR
-  export WALLPAPER_STYLE
 }
 
 init
 
-if [[ "$1" = "--random" ]] || [[ "$1" = "-r" ]]; then
-  echo "running in random mode."
+if [[ "$1" == "--restore" ]]; then
+  echo "restoring previous wallpaper."
+  restore && apply
+elif [[ "$1" = "--random" ]] || [[ "$1" = "-r" ]]; then
+  echo "choosing random wallpaper."
   random && apply
 elif [[ "$1" = "--interactive" ]] || [[ "$1" = "-i" ]]; then
   echo "running in interactive mode."
