@@ -1,13 +1,11 @@
 #!/bin/sh
 
-# kill running waybar instances
-if [ "$(ps -e | grep -c waybar)" -gt "0" ]; then
-  killall -9 waybar
+if [ "$(ps -e | grep -c waybar)" -eq "0" ]; then
+  waybar & # start waybar if not running already
+else
+  killall -SIGUSR2 waybar && # reload waybar & send notification
+    notify-send "Waybar reloaded." -i /usr/share/icons/ePapirus-Dark/32x32/apps/systemtray.svg
 fi
-
-# start waybar & send a notification
-waybar &
-notify-send "Waybar reloaded." -i /usr/share/icons/ePapirus-Dark/32x32/apps/systemtray.svg
 
 # waybar doesn't seem to show the keyboard language until it is changed
 # for the first time, this does nothing noticeable but fixes the issue
